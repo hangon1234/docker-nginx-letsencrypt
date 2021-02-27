@@ -10,8 +10,6 @@ services:
         command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos"
 
     nginx_http:
-        depends_on:
-            - certbot
         container_name: nginx_http
         hostname: nginx_http
         image: nginx
