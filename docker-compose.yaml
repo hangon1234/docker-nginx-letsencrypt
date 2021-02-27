@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+    certbot:
+        container_name: certbot
+        image: certbot/certbot
+        volumes:
+            - ./data/letsencrypt:/etc/letsencrypt/live/
+            - ./data/letsencrypt/www:/var/www/certbot
+        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos"
+
+    nginx_http:
+        depends_on:
+            - certbot
+        container_name: nginx_http
+        hostname: nginx_http
+        image: nginx
+        env_file:
+            - .env
+        ports:
+            - "80:80"
+        restart: "always"
+        volumes:
+            - ./data/config/nginx_http.conf:/etc/nginx/conf.d/default.conf
+            - ./data/letsencrypt/www:/var/www/certbot
+            
+    nginx_https:
+        container_name: nginx_https
+        image: nginx
+        ports:
+            - "443:443"
+        env_file:
+            - .env
+        hostname: nginx_https
+        restart: "always"
+        volumes:
+            - ./data/config/nginx_https.conf:/etc/nginx/conf.d/default.conf
+            - ./data/letsencrypt:/etc/letsencrypt
+            - ./data/letsencrypt:/etc/ssl
+            - ./data/generate-dh-param.sh:/docker-entrypoint.d/generate-dh-param.sh
+    
+    speedtest:
+        container_name: speedtest
+        image: adolfintel/speedtest
+        hostname: speedtest
+        environment:
+            - MODE=backend
+        restart: always
