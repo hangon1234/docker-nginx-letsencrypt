@@ -29,6 +29,8 @@ services:
             - "443:443"
         env_file:
             - .env
+        environment:
+            NGINX_ENVSUBST_TEMPLATE_SUFFIX: ".conf"
         hostname: nginx_https
         restart: "always"
         volumes:
