@@ -3,7 +3,7 @@
 
 This `docker-compose.yaml` will make secure `nginx` server with `letsencrypt` SSL certificate.   
 I tried to avoid make any complicated bash script. No need to modify nginx configuration.   
-Change env.example.env to .env and modify as you need.
+Change env.example to .env and modify as you need.
 `docker-compose.yaml` has two `nginx` instances, one for http and the other for https
 
 nginx-http only for https redirection and letsencrypt certificate renewal purpose.   
