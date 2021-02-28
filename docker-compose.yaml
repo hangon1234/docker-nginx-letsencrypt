@@ -7,7 +7,7 @@ services:
         volumes:
             - ./data/letsencrypt:/etc/letsencrypt/live/
             - ./data/letsencrypt/www:/var/www/certbot
-        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos"
+        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos --dry-run"
 
     nginx_http:
         container_name: nginx_http
