@@ -1,41 +1,44 @@
 {
-  "log" : {
-    "access": "/var/log/v2ray/access.log",
-    "error": "/var/log/v2ray/error.log",
-    "loglevel": "warning"
-  },
-  "inbound": {
-    "port": 10033,
-    "protocol": "vmess",
-    "settings": {
-      "clients": [
-        {
-          "id": "34fb1d7e-d0eb-461f-902f-4f4f2eaea252",
-          "alterId": 0
-        }
-      ]
-    }
-  },
-  "outbound": {
-    "protocol": "freedom",
-    "settings": {}
-  },
-  "outboundDetour": [
+ "log": {
+  "loglevel": "warning",
+  "access": "/var/log/v2ray/access.log",
+  "error": "/var/log/v2ray/error.log"
+ },
+    "inbounds": [
     {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
+        "port": 51821,
+        "protocol": "vmess",
+        "settings": {
+            "clients": [{
+                "id": "34fb1d7e-d0eb-461f-902f-4f4f2eaea252",
+                "level": 0,
+                "alterId": 100
+            }]
+        },
+        "streamSettings": {
+            "network": "ws",
+            "wsSettings": {
+                "path": "/"
+            }
+        }
+    },
+    ],
+    "outbounds": [
+        {
+        "protocol": "freedom",
+        "settings": {}
+        },
+        {
+        "protocol":"blackhole",
+        "settings":{},
+        "tag":"blocked"
+        }
+    ],
+    "routing":{
+        "rules":[{
+        "type":"field",
+        "ip":["geoip:private"],
+        "outboundTag":"blocked"
+        }]
     }
-  ],
-  "routing": {
-	  "domainStrategy": "AsIs",
-	  "rules": [],
-	  "balancers": []
-	},
-  "transport": {
-    "kcpSettings": {
-      "uplinkCapacity": 10,
-      "downlinkCapacity": 10
-    }
-  }
 }
