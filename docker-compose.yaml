@@ -7,7 +7,7 @@ services:
         volumes:
             - ./data/letsencrypt:/etc/letsencrypt
             - ./data/letsencrypt/www:/var/www/certbot
-        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos --cert-path /etc/letsencrypt/cert.pem --chain-path /etc/letsencrypt/chain.pem --key-path /etc/letsencrypt/privkey.pem --fullchain-path /etc/letsencrypt/fullchain.pem"
+        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos --cert-path /etc/letsencrypt/cert.pem --chain-path /etc/letsencrypt/chain.pem --key-path /etc/letsencrypt/privkey.pem --fullchain-path /etc/letsencrypt/fullchain.pem --dry-run --staging --cert-name cert"
 
     nginx_http:
         container_name: nginx_http
