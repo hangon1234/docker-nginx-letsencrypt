@@ -5,12 +5,9 @@ services:
         container_name: certbot
         image: certbot/certbot
         volumes:
-            - ./data/letsencrypt/cert.pem:/etc/letsencrypt/live/cert.pem
-            - ./data/letsencrypt/chain.pem:/etc/letsencrypt/live/chain.pem
-            - ./data/letsencrypt/fullchain.pem:/etc/letsencrypt/live/fullchain.pem
-            - ./data/letsencrypt/privkey.pem:/etc/letsencrypt/live/privkey.pem
+            - ./data/letsencrypt:/etc/letsencrypt
             - ./data/letsencrypt/www:/var/www/certbot
-        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos"
+        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos --cert-path /etc/letsencrypt/cert.pem --chain-path /etc/letsencrypt/chain.pem --key-path /etc/letsencrypt/privkey.pem --fullchain-path /etc/letsencrypt/fullchain.pem"
 
     nginx_http:
         container_name: nginx_http
@@ -36,9 +33,7 @@ services:
         restart: "always"
         volumes:
             - ./data/config/nginx_https.conf.template:/etc/nginx/templates/nginx_https.conf.template
-            - ./data/letsencrypt/cert.pem:/etc/letsencrypt/cert.pem
-            - ./data/letsencrypt/chain.pem:/etc/letsencrypt/chain.pem
-            - ./data/letsencrypt/fullchain.pem:/etc/letsencrypt/fullchain.pem
+            - ./data/letsencrypt:/etc/letsencrypt
             - ./data/letsencrypt:/etc/ssl
             - ./data/generate-dh-param.sh:/docker-entrypoint.d/generate-dh-param.sh
     
