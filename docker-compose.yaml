@@ -36,7 +36,9 @@ services:
         restart: "always"
         volumes:
             - ./data/config/nginx_https.conf.template:/etc/nginx/templates/nginx_https.conf.template
-            - ./data/letsencrypt:/etc/letsencrypt
+            - ./data/letsencrypt/cert.pem:/etc/letsencrypt/cert.pem
+            - ./data/letsencrypt/chain.pem:/etc/letsencrypt/chain.pem
+            - ./data/letsencrypt/fullchain.pem:/etc/letsencrypt/fullchain.pem
             - ./data/letsencrypt:/etc/ssl
             - ./data/generate-dh-param.sh:/docker-entrypoint.d/generate-dh-param.sh
     
