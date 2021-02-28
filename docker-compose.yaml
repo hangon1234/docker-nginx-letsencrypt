@@ -5,7 +5,10 @@ services:
         container_name: certbot
         image: certbot/certbot
         volumes:
-            - ./data/letsencrypt:/etc/letsencrypt/live/
+            - ./data/letsencrypt/cert.pem:/etc/letsencrypt/live/cert.pem
+            - ./data/letsencrypt/chain.pem:/etc/letsencrypt/live/chain.pem
+            - ./data/letsencrypt/fullchain.pem:/etc/letsencrypt/live/fullchain.pem
+            - ./data/letsencrypt/privkey.pem:/etc/letsencrypt/live/privkey.pem
             - ./data/letsencrypt/www:/var/www/certbot
         command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos --dry-run"
 
