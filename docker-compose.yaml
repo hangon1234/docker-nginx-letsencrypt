@@ -7,7 +7,8 @@ services:
         volumes:
             - ./data/v2ray:/etc/v2ray
             - ./data/log/v2ray:/var/log/v2ray
-            
+        restart: always
+        
     certbot:
         container_name: certbot
         image: certbot/certbot
