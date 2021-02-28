@@ -32,7 +32,7 @@ services:
         hostname: nginx_https
         restart: "always"
         volumes:
-            - ./data/config/nginx_https.conf.template:/etc/nginx/conf.d/default.conf
+            - ./data/config/nginx_https.conf.template:/etc/nginx/templates/
             - ./data/letsencrypt:/etc/letsencrypt
             - ./data/letsencrypt:/etc/ssl
             - ./data/generate-dh-param.sh:/docker-entrypoint.d/generate-dh-param.sh
