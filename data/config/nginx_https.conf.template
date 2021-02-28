@@ -55,7 +55,7 @@ server {
 	client_max_body_size 100M;
 	}
 	
-	location /speedtest/ {
+	location /v2ray/ {
     proxy_pass http://v2ray:10086/;
     proxy_buffering off;
     proxy_http_version 1.1;
