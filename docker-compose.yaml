@@ -42,5 +42,5 @@ services:
         image: adolfintel/speedtest
         hostname: speedtest
         environment:
-            - MODE=backend
+            - MODE=standalone
         restart: always
