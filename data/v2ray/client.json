@@ -1,0 +1,16 @@
+{
+  "vnext": [
+    {
+      "address": "https://enjoykhg3.mooo.com/v2ray",
+      "port": 443,
+      "users": [
+        {
+          "id": "34fb1d7e-d0eb-461f-902f-4f4f2eaea252",
+          "alterId": 4,
+          "security": "auto",
+          "level": 0
+        }
+      ]
+    }
+  ]
+}
