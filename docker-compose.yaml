@@ -19,7 +19,7 @@ services:
             - "80:80"
         restart: "always"
         volumes:
-            - ./data/config/nginx_http.conf.template:/etc/nginx/templates/
+            - ./data/config/nginx_http.conf.template:/etc/nginx/templates/nginx_http.conf.template
             - ./data/letsencrypt/www:/var/www/certbot
             
     nginx_https:
@@ -32,7 +32,7 @@ services:
         hostname: nginx_https
         restart: "always"
         volumes:
-            - ./data/config/nginx_https.conf.template:/etc/nginx/templates/
+            - ./data/config/nginx_https.conf.template:/etc/nginx/templates/nginx_https.conf.template
             - ./data/letsencrypt:/etc/letsencrypt
             - ./data/letsencrypt:/etc/ssl
             - ./data/generate-dh-param.sh:/docker-entrypoint.d/generate-dh-param.sh
