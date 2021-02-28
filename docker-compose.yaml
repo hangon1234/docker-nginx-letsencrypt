@@ -34,7 +34,7 @@ services:
         volumes:
             - ./data/config/nginx_https.conf.template:/etc/nginx/templates/nginx_https.conf.template
             - ./data/letsencrypt:/etc/letsencrypt
-            - ./data/letsencrypt:/etc/ssl
+            - ./data/dhparam:/etc/ssl
             - ./data/generate-dh-param.sh:/docker-entrypoint.d/generate-dh-param.sh
     
     speedtest:
