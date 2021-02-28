@@ -10,7 +10,7 @@ services:
             - ./data/letsencrypt/fullchain.pem:/etc/letsencrypt/live/fullchain.pem
             - ./data/letsencrypt/privkey.pem:/etc/letsencrypt/live/privkey.pem
             - ./data/letsencrypt/www:/var/www/certbot
-        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos --dry-run"
+        command: "certonly --webroot --webroot-path /var/www/certbot -n -d ${SERVER_DOMAIN} --email ${EMAIL} --agree-tos"
 
     nginx_http:
         container_name: nginx_http
