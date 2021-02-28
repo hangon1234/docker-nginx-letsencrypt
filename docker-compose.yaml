@@ -19,7 +19,7 @@ services:
             - "80:80"
         restart: "always"
         volumes:
-            - ./data/config/nginx_http.conf:/etc/nginx/conf.d/default.conf
+            - ./data/config/nginx_http.conf.template:/etc/nginx/templates/
             - ./data/letsencrypt/www:/var/www/certbot
             
     nginx_https:
