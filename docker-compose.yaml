@@ -7,6 +7,8 @@ services:
         volumes:
             - ./data/v2ray:/etc/v2ray
             - ./data/log/v2ray:/var/log/v2ray
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
         restart: always
         
     certbot:
