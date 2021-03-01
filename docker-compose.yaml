@@ -5,10 +5,10 @@ services:
         container_name: v2-ui
         image: sola97/v2-ui:latest
         container_name: v2-ui
-        volumes:
-            - ./data/v2-ui:/etc/v2-ui
-            - ./data/log/v2ray:/var/log/v2ray
-            - ./data/v2ray:/etc/v2ray
+        # volumes:
+            # - ./data/v2-ui:/etc/v2-ui
+            # - ./data/log/v2ray:/var/log/v2ray
+            # - ./data/v2ray:/etc/v2ray
         restart: always
         
     v2ray:
