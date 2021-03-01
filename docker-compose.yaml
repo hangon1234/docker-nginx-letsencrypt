@@ -54,3 +54,10 @@ services:
         environment:
             - MODE=standalone
         restart: always
+        
+    firefox:
+        container_name: firefox
+        image: jiesage/firefox
+        volumes:
+            ./data/firefox:/config
+            
