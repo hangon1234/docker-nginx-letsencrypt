@@ -2,6 +2,7 @@ version: "3"
 
 services:
     v2-ui:
+        container_name: v2-ui
         image: sola97/v2-ui:latest
         container_name: v2-ui
         volumes:
