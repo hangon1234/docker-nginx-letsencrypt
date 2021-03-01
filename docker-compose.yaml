@@ -57,7 +57,7 @@ services:
         
     firefox:
         container_name: firefox
-        image: jiesage/firefox
+        image: jlesage/firefox
         volumes:
             - ./data/firefox:/config
             
