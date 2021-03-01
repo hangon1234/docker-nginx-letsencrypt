@@ -62,3 +62,5 @@ services:
             - ./data/firefox:/config
         shm_size: '2gb'
         restart: "always"
+        environment:
+            - VNC_PASSWORD=${FIREFOX_PASSWORD}
