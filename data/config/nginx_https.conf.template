@@ -63,6 +63,7 @@ server {
 	}
 	
 	location /traffic/ {
+	proxy_pass http://v2-ui:443/;
     proxy_set_header Upgrade $http_upgrade;
 	proxy_set_header Connection "Upgrade";
 	proxy_set_header Proxy "";
