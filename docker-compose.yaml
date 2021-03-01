@@ -60,4 +60,4 @@ services:
         image: jlesage/firefox
         volumes:
             - ./data/firefox:/config
-            
+        shm_size: '2gb'           
