@@ -39,17 +39,16 @@ server {
   	ssl_trusted_certificate /etc/letsencrypt/live/cert/fullchain.pem;
   	resolver 1.1.1.1 1.0.0.1 [2606:4700:4700::1111] [2606:4700:4700::1001] valid=300s; # Cloudflare
   	resolver_timeout 5s;
-
-   
-   location /speedtest {
-    proxy_pass http://speedtest:80;
-    proxy_buffering off;
-    proxy_http_version 1.1;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection $http_connection;
-    access_log off;
-	client_max_body_size 100M;
+	
+	location /speedtest/ {
+		proxy_pass http://speedtest:80/;
+		proxy_buffering off;
+		proxy_http_version 1.1;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection $http_connection;
+		access_log off;
+		client_max_body_size 100M;
 	}
 	
 	location / {
