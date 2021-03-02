@@ -89,4 +89,5 @@ services:
         volumes:
             - ./data/mysql:/var/lib/mysql
             - ./data/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+        restart: always
             
