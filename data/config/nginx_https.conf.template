@@ -83,4 +83,15 @@ server {
 			proxy_read_timeout 86400;
 		}
 	}
+	
+	location /putty/ {
+		proxy_pass http://putty:5800/;
+		location /putty/websockify {
+			proxy_pass http://putty:5800/websockify/;
+			proxy_http_version 1.1;
+			proxy_set_header Upgrade $http_upgrade;
+			proxy_set_header Connection "upgrade";
+			proxy_read_timeout 86400;
+		}
+	}
 }

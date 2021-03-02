@@ -65,3 +65,13 @@ services:
         environment:
             - VNC_PASSWORD=${FIREFOX_PASSWORD}
             - ENABLE_CJK_FONT=1
+    
+    putty:
+        container_name: putty
+        image: jlesage/putty
+        volumes:
+            - ./data/putty:/config
+        environment:
+            - VNC_PASSWORD=${PUTTY_PASSWORD}
+            - ENABLE_CJK_FONT=1
+        restart: "always"
