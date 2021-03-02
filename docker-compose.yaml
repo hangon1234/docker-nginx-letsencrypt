@@ -66,12 +66,27 @@ services:
             - VNC_PASSWORD=${FIREFOX_PASSWORD}
             - ENABLE_CJK_FONT=1
     
-    putty:
-        container_name: putty
-        image: jlesage/putty
-        volumes:
-            - ./data/putty:/config
+    guacd:
+        container_name: guacd
+        image: guacamole/guacd
+    
+    guacamole:
+        container_name: guacamole
+        image: guacamole/guacamole
         environment:
-            - VNC_PASSWORD=${PUTTY_PASSWORD}
-            - ENABLE_CJK_FONT=1
-        restart: "always"
+            - MYSQL_DATABASE=guacamole
+            - MYSQL_USER=${GUACAMOLE_DB_ID}
+            - MYSQL_PASSWORD=${GUACAMOLE_DB_PASSWORD}
+            
+    mysql:
+        container_name: mysql
+        image: mysql/latest
+        environment:
+            - MYSQL_DATABASE=guacamole
+            - MYSQL_USER=${GUACAMOLE_DB_ID}
+            - MYSQL_PASSWORD=${GUACAMOLE_DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+            - ./data/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+            
