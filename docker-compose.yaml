@@ -80,7 +80,7 @@ services:
             
     mysql:
         container_name: mysql
-        image: mysql/latest
+        image: mysql/8.0.23
         environment:
             - MYSQL_DATABASE=guacamole
             - MYSQL_USER=${GUACAMOLE_DB_ID}
