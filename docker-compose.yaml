@@ -74,8 +74,11 @@ services:
     guacamole:
         container_name: guacamole
         image: guacamole/guacamole
+        links:
+            - "guacd:guacd"
+            - "mysql:mysql"
+            
         environment:
-            - GUACD_HOSTNAME=guacd
             - MYSQL_DATABASE=guacamole
             - MYSQL_USER=${GUACAMOLE_DB_ID}
             - MYSQL_PASSWORD=${GUACAMOLE_DB_PASSWORD}
