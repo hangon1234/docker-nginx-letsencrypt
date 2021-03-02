@@ -64,3 +64,4 @@ services:
         restart: "always"
         environment:
             - VNC_PASSWORD=${FIREFOX_PASSWORD}
+            - ENABLE_CJK_FONT=1
