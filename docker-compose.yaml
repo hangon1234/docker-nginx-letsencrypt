@@ -69,6 +69,7 @@ services:
     guacd:
         container_name: guacd
         image: guacamole/guacd
+        restart: always
     
     guacamole:
         container_name: guacamole
@@ -77,6 +78,7 @@ services:
             - MYSQL_DATABASE=guacamole
             - MYSQL_USER=${GUACAMOLE_DB_ID}
             - MYSQL_PASSWORD=${GUACAMOLE_DB_PASSWORD}
+        restart: always
             
     mysql:
         container_name: mysql
