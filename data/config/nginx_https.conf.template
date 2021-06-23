@@ -40,7 +40,7 @@ server {
   	resolver 1.1.1.1 1.0.0.1 [2606:4700:4700::1111] [2606:4700:4700::1001] valid=300s; # Cloudflare
   	resolver_timeout 5s;
 	
-	location /speedtest/ {
+	location / {
 		proxy_pass http://speedtest:80/;
 		proxy_buffering off;
 		proxy_http_version 1.1;
@@ -51,56 +51,18 @@ server {
 		client_max_body_size 100M;
 	}
 	
-	location / {
-    proxy_pass http://v2-ui:65432/;
-    proxy_buffering off;
-    proxy_http_version 1.1;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection $http_connection;
-    access_log off;
-	}
-	
-	location /traffic {
-	proxy_pass http://v2-ui:443;
-    proxy_redirect off;
-	proxy_http_version 1.1;
-	proxy_set_header Host "${SERVER_DOMAIN}";
-	proxy_set_header Connection "Upgrade";
-	proxy_set_header Upgrade "WebSocket";
-	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-	proxy_intercept_errors on;
-	}
-	
-	location /shadowsocks {
-	proxy_pass http://v2-ui:444;
-    proxy_redirect off;
-	proxy_http_version 1.1;
-	proxy_set_header Host "${SERVER_DOMAIN}";
-	proxy_set_header Connection "Upgrade";
-	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-	proxy_intercept_errors on;
-	proxy_set_header Upgrade "WebSocket";
-	}
-	
-	location /firefox/ {
-		proxy_pass http://firefox:5800/;
-		location /firefox/websockify {
-			proxy_pass http://firefox:5800/websockify/;
-			proxy_http_version 1.1;
-			proxy_set_header Upgrade $http_upgrade;
-			proxy_set_header Connection "upgrade";
-			proxy_read_timeout 86400;
-		}
-	}
-	
-	location /guacamole/ {
-		proxy_pass http://guacamole:8080/guacamole/;
-		proxy_buffering off;
-		proxy_http_version 1.1;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header Upgrade $http_upgrade;
-		proxy_set_header Connection $http_connection;
-		access_log off;
-	}
+	location /v2ray { # Consistent with the path of V2Ray configuration
+      if ($http_upgrade != "websocket") { # Return 404 error when WebSocket upgrading negotiate failed
+          return 404;
+      }
+      proxy_redirect off;
+      proxy_pass http://v2ray:10000; # Assume WebSocket is listening at localhost on port of 10000
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header Host $host;
+      # Show real IP in v2ray access.log
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
 }
