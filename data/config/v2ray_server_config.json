@@ -2,7 +2,6 @@
     "inbounds": [
       {
         "port": 10000,
-        "listen":"nginx_https",// Only listen to local host 127.0.0.1, avioding other external inspection to 10000 port 
         "protocol": "vmess",
         "settings": {
           "clients": [
